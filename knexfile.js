@@ -5,7 +5,7 @@ module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './demo.db'
+      filename: './headmaster.db'
     },
     useNullAsDefault: true
   },
@@ -14,8 +14,8 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
-      password: 'password'
+      user:     'username', //Look this up but the default username is postgres
+      password: 'password'  //there may not be a default password if using postgres
     },
     pool: {
       min: 2,

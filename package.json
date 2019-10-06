@@ -8,7 +8,18 @@
   "dependencies": {
     "express": "4.17.1",
     "knex": "0.19.4",
-    "mustache": "^3.1.0",
+    "mustache": "3.1.0",
     "sqlite3": "4.1.0"
-  }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oakmac/basic-express-with-knex.git"
+  },
+  "bugs": {
+    "url": "https://github.com/oakmac/basic-express-with-knex/issues"
+  },
+  "homepage": "https://github.com/oakmac/basic-express-with-knex#readme"
 }
