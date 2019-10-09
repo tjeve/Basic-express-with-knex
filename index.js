@@ -9,6 +9,25 @@ const {createCohort, getAllCohorts, getOneCohort} = require('./src/db/cohorts.js
 
 const port = 3000
 
+// For Authorization
+const cors = require('cors')
+const bodyparser = require('body-parser')
+
+app.use(cors())
+app.use(bodyParser.urlencoded({ extended: false}))
+
+//session middleware
+const session = require('express-session')
+app.use(session({ ... }))
+
+// Passport
+const passport = require('passport')
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+
+
 // -----------------------------------------------------------------------------
 // Express.js Endpoints
 
@@ -22,6 +41,12 @@ app.get('/', function (req, res) {
       res.send(mustache.render(homepageTemplate, { cohortsListHTML: renderAllCohorts(allCohorts) }))
     })
 })
+
+// Login middleware
+app.get('/login', passport.authenticate('oath2', {
+  session: true,
+  successReturnToOrRedirect: '/'
+}))
 
 function slugify (str) {
   return str.toLowerCase()
