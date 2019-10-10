@@ -7,7 +7,7 @@ const app = express()
 const log = require('./src/logging.js')
 const {createCohort, getAllCohorts, getOneCohort} = require('./src/db/cohorts.js')
 
-const port = 3000
+const port = 3100
 
 // For Authorization
 const cors = require('cors')
@@ -31,7 +31,7 @@ app.use(passport.session())
 // -----------------------------------------------------------------------------
 // Express.js Endpoints
 
-const homepageTemplate = fs.readFileSync('./templates/homepage.mustache', 'utf8')
+const homepageTemplate = fs.readFileSync('./templates/homepage.html', 'utf8')
 
 app.use(express.urlencoded())
 
@@ -41,7 +41,6 @@ app.get('/', function (req, res) {
       res.send(mustache.render(homepageTemplate, { cohortsListHTML: renderAllCohorts(allCohorts) }))
     })
 })
-
 // Login middleware
 app.get('/login', passport.authenticate('oath2', {
   session: true,
