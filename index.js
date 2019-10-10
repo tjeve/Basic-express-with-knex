@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false}))
 
 //session middleware
 const session = require('express-session')
-app.use(session({ ... }))
+// app.use(session({ ... }))
 
 // Passport
 const passport = require('passport')

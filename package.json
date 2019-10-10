@@ -16,7 +16,8 @@
     "sqlite3": "^4.1.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -26,5 +27,7 @@
     "url": "https://github.com/oakmac/basic-express-with-knex/issues"
   },
   "homepage": "https://github.com/oakmac/basic-express-with-knex#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "1.19.3"
+  }
 }
