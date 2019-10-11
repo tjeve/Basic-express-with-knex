@@ -1,4 +1,5 @@
-const fs = require('fs')
+// Modules
+const fs = require('fs') //allows you to access the file system
 const mustache = require('mustache')
 
 const express = require('express')
@@ -33,6 +34,8 @@ app.use(passport.session())
 
 const homepageTemplate = fs.readFileSync('./templates/homepage.html', 'utf8')
 
+const cohortTemplate=  fs.readFileSync('./templates/cohort.html', 'utf8')
+
 app.use(express.urlencoded())
 
 app.get('/', function (req, res) {
@@ -41,11 +44,6 @@ app.get('/', function (req, res) {
       res.send(mustache.render(homepageTemplate, { cohortsListHTML: renderAllCohorts(allCohorts) }))
     })
 })
-// Login middleware
-app.get('/login', passport.authenticate('oath2', {
-  session: true,
-  successReturnToOrRedirect: '/'
-}))
 
 function slugify (str) {
   return str.toLowerCase()
@@ -54,6 +52,12 @@ function slugify (str) {
 
 console.assert('abc-xyz' === slugify('Abc Xyz'))
 console.assert('aaa-bbb' === slugify('AAA      BBB'))
+
+// Login middleware
+app.get('/login', passport.authenticate('oath2', {
+  session: true,
+  successReturnToOrRedirect: '/'
+}))
 
 app.post('/cohorts', function (req, res) {
   const cohortTitle = req.body.title
@@ -79,11 +83,20 @@ app.post('/cohorts', function (req, res) {
 app.get('/cohorts/:slug', function (req, res) {
   getOneCohort(req.params.slug)
     .then(function (cohort) {
-      res.send('<pre>' + prettyPrintJSON(cohort) + '</pre>')
+      console.log(req.body)
+      // res.send('<pre>' + prettyPrintJSON(cohort) + '</pre>')
+      res.send(mustache.render(cohortTemplate, {CohortTitleHTML: renderCohortTitle(cohort)}))
     })
     .catch(function (err) {
       res.status(404).send('cohort not found :(')
     })
+})
+
+app.post('/cohorts/:slug', function (req, res) {
+  const cohortTitle = req.body.title
+  if (slug === '') {
+    slug = slugify(cohortTitle)
+  }
 })
 
 app.listen(port, function () {
@@ -95,6 +108,10 @@ app.listen(port, function () {
 
 function renderCohort (cohort) {
   return `<li><a href="/cohorts/${cohort.slug}">${cohort.title}</a></li>`
+}
+
+function renderCohortTitle (cohort) {
+  return `${cohort.title}`
 }
 
 function renderAllCohorts (allCohorts) {

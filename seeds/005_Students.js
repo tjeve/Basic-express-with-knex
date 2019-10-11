@@ -16,6 +16,11 @@ exports.seed = function(knex) {
           cohortId: 1
         },
         {
+          name: 'Terrence',
+          isActive: true,
+          CohortID: 1
+        },
+        {
           name: 'Ryan',
           isActive: false,
           cohortId: 1

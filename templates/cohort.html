@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{{CohortTitleHTML}}}</title>
+</head>
+<body>
+    <h1>{{{CohortTitleHTML}}}</h1>
+    <form action="/cohorts/:slug" method="post">
+        <label>Student:</label>
+        <input type="text" name="name" />
+    
+        <label>CohortID:</label>
+        <input type="number" name="cohortID" />
+    
+        <button type="submit">Add Student</button>
+      </form>
+</body>
+</html>
